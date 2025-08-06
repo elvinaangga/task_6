@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .count-form {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .count-input {
+            padding: 8px;
+            width: 60px;
+        }
+        .submit-btn {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Car List</h1>
+
+<div class="count-form">
+    <form action="/cars" method="get">
+        <label for="count">Number of cars to display (1-5):</label>
+        <input type="number" id="count" name="count" class="count-input"
+               min="1" max="5" th:value="${param.count != null ? param.count : 5}">
+        <button type="submit" class="submit-btn">Show</button>
+    </form>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Year</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.brand}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.year}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/}" class="home-link">Back to Home</a>
+</body>
+</html>
