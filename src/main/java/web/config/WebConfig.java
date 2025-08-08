@@ -47,12 +47,13 @@ public class WebConfig implements WebMvcConfigurer {
             return engine;
         }
 
-        @Override
-        public void configureViewResolvers(ViewResolverRegistry registry) {
-            ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        @Bean
+        public ThymeleafViewResolver viewResolver() {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
             viewResolver.setTemplateEngine(templateEngine());
             viewResolver.setCharacterEncoding("UTF-8");
-            viewResolver.setOrder(1);
-            registry.viewResolver(viewResolver);
+            return viewResolver;
         }
+
+
 }
