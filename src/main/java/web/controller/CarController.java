@@ -16,19 +16,9 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping("/")
-    public String home() {
-        return "index";
-    }
-
     @GetMapping("/cars")
     public String getCars(@RequestParam(required = false) Integer count, Model model) {
         model.addAttribute("cars", carService.getCars(count));
         return "cars";
-    }
-
-    @GetMapping("/test")
-    public String test() {
-        return "Test works!";
     }
 }
